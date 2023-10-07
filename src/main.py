@@ -155,7 +155,7 @@ class App(QMainWindow):
         if iad_status is True:
             json_operations.json_to_tabular(self, iad=True)
         else:
-            json_operations.json_to_tabular(iad=False)
+            json_operations.json_to_tabular(self, iad=False)
 
 
 if __name__ == "__main__":
