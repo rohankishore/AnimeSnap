@@ -65,7 +65,7 @@ class Window(MSFluentWindow):
         w.cancelButton.setText('Return')
 
         if w.exec():
-            QDesktopServices.openUrl(QUrl("https://github.com/rohankishore/"))
+            QDesktopServices.openUrl(QUrl("https://github.com/rohankishore/AnimeSnap"))
 
 
 
