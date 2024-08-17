@@ -64,8 +64,8 @@ class App(QWidget):
 
         button_layout.addWidget(self.img_url_entry)
 
-        open_image_icon = FIF.FOLDER
-        self.open_image_button = QPushButton(self)
+        open_image_icon = QIcon("icons/folder.png")
+        self.open_image_button = PushButton(self)
         self.open_image_button.clicked.connect(self.open_image)
         self.open_image_button.setIcon(open_image_icon)
         self.open_image_button.setIconSize(QSize(23, 23))

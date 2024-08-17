@@ -1,15 +1,11 @@
-import sys
-import os
-import json_operations
-import search
-from qfluentwidgets import *
-from qfluentwidgets import FluentIcon as FIF
-from qframelesswindow import *
-import AnimeSearch
-import qdarktheme
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
+from qfluentwidgets import *
+from qfluentwidgets import FluentIcon as FIF
+from qframelesswindow import *
+
+import AnimeSearch
 
 
 class Window(MSFluentWindow):
@@ -57,10 +53,10 @@ class Window(MSFluentWindow):
 
     def showMessageBox(self):
         w = MessageBox(
-            'ZenNotes 📝',
+            'AnimeSnap 🏯',
             (
-                    "Version : 1.1"
-                    + "\n" + "\n" + "\n" + "💝  I hope you'll enjoy using ZenNotes as much as I did while coding it  💝" + "\n" + "\n" + "\n" +
+                    "Version : 3.0"
+                    + "\n" + "\n" + "\n" + "💝  I hope you'll enjoy using AnimeSnap as much as I did while coding it  💝" + "\n" + "\n" + "\n" +
                     "Made with 💖 By Rohan Kishore"
             ),
             self
