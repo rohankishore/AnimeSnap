@@ -21,7 +21,7 @@ class Window(MSFluentWindow):
 
 
         # create sub interface
-        self.homeInterface = AnimeSearch.App()
+        self.homeInterface = AnimeSearch.App(self)
         # self.settingInterface = Settings()
         # self.settingInterface.setObjectName("markdownInterface")
 

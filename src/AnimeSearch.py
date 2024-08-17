@@ -13,11 +13,13 @@ from PyQt6.QtWidgets import *
 
 
 class App(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
         self.setObjectName("AnimeSnap")
         self.setGeometry(100, 100, 450, 150)
+
+        self.mainApp = parent
 
         # Create a stacked widget to manage different screens
         self.stacked_widget = QStackedWidget(self)
@@ -42,21 +44,6 @@ class App(QWidget):
         top_layout = QHBoxLayout()
         button_layout = QHBoxLayout()
         checkbox_layout = QHBoxLayout()
-
-        theme_icon = QIcon("icons/dark.png")
-        self.themes_button = QPushButton(self)
-        self.themes_button.setStyleSheet("""
-        QPushButton {
-        border: none;
-        }
-        """)
-        self.themes_button.setIconSize(QSize(23, 23))
-        self.themes_button.clicked.connect(self.onClickThemeIcon)
-        self.themes_button.setIcon(theme_icon)
-        self.themes_button.setText("")
-        self.themes_button.setFixedSize(23, 23)
-        top_layout.addStretch()
-        top_layout.addWidget(self.themes_button)
 
         layout.addLayout(top_layout)
 
@@ -129,21 +116,6 @@ class App(QWidget):
         self.stacked_widget.setCurrentWidget(self.main_menu_widget)
         self.img_path = ""
         self.file_path_label.setText("")  # Use self.file_path_label instead of self.main_menu_widget.file_path_label
-
-    def onClickThemeIcon(self):
-        if self.ctheme == "dark":
-            self.ctheme = "light"
-            qdarktheme.setup_theme("light")
-        else:
-            self.ctheme = "dark"
-            qdarktheme.setup_theme("dark")
-        self.onThemeIconVisibilityChanged()
-
-    def onThemeIconVisibilityChanged(self):
-        if self.ctheme == "dark":
-            self.themes_button.setIcon(QIcon("icons/dark.png"))
-        else:
-            self.themes_button.setIcon(QIcon("icons/light.png"))
 
     def onClickSearch(self):
         self.img_url = self.img_url_entry.text()
