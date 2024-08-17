@@ -5,191 +5,77 @@ import search
 from qfluentwidgets import *
 from qfluentwidgets import FluentIcon as FIF
 from qframelesswindow import *
-
+import AnimeSearch
 import qdarktheme
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
 from PyQt6.QtWidgets import *
 
 
-class App(QMainWindow):
+class Window(MSFluentWindow):
+    """ Main window class. Uses MSFLuentWindow to imitate the Windows 11 FLuent Design windows. """
+
     def __init__(self):
+        # self.isMicaEnabled = False
         super().__init__()
+        #self.setTitleBar(CustomTitleBar(self))
+        #self.tabBar = self.titleBar.tabBar  # type: TabBar
 
-        self.setWindowTitle("AnimeSnap")
-        self.setGeometry(100, 100, 450, 150)
+        setTheme(Theme.DARK)
 
-        # Create a stacked widget to manage different screens
-        self.stacked_widget = QStackedWidget(self)
-        self.setCentralWidget(self.stacked_widget)
 
-        # Create the main menu widget
-        self.main_menu_widget = QWidget(self)
-        self.stacked_widget.addWidget(self.main_menu_widget)
+        # create sub interface
+        self.homeInterface = AnimeSearch.App()
+        # self.settingInterface = Settings()
+        # self.settingInterface.setObjectName("markdownInterface")
 
-        self.img_path = ""
-        self.img_url = ""
-        self.anilist_id = ""
-        self.ctheme = "dark"
 
-        central_widget = QWidget(self)
-        self.setCentralWidget(central_widget)
+        self.initNavigation()
+        self.initWindow()
 
-        layout = QVBoxLayout()
-        central_widget.setLayout(layout)
+    def initNavigation(self):
+        self.addSubInterface(self.homeInterface, FIF.EDIT, 'Write', FIF.EDIT, NavigationItemPosition.TOP)
+        # self.addSubInterface(self.settingInterface, FIF.SETTING, 'Settings', FIF.SETTING,  NavigationItemPosition.BOTTOM)
+        self.navigationInterface.addItem(
+            routeKey='Help',
+            icon=FIF.INFO,
+            text='About',
+            onClick=self.showMessageBox,
+            selectable=False,
+            position=NavigationItemPosition.BOTTOM)
 
-        self.buttons_frame = QWidget(self)
-        layout.addWidget(self.buttons_frame)
+        self.navigationInterface.setCurrentItem(
+            self.homeInterface.objectName())
 
-        # Create a horizontal layout
-        top_layout = QHBoxLayout()
-        button_layout = QHBoxLayout()
-        checkbox_layout = QHBoxLayout()
+    def initWindow(self):
+        self.resize(1100, 750)
+        self.setWindowIcon(QIcon('resource/icon.ico'))
+        self.setWindowTitle('ZenNotes')
 
-        theme_icon = QIcon("icons/dark.png")
-        self.themes_button = QPushButton(self)
-        self.themes_button.setIconSize(QSize(23, 23))
-        self.themes_button.clicked.connect(self.onClickThemeIcon)
-        self.themes_button.setIcon(theme_icon)
-        self.themes_button.setText("")
-        self.themes_button.setFixedSize(23, 23)
-        top_layout.addStretch()
-        top_layout.addWidget(self.themes_button)
+        w, h = 1200, 800
+        self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
 
-        layout.addLayout(top_layout)
-
-        layout.addWidget(QLabel(""))
-
-        self.img_url_entry = QLineEdit(self)
-        self.img_url_entry.setPlaceholderText("Enter image URL or Upload a image")
-
-        self.file_path_label = QLabel("")
-
-        button_layout.addWidget(self.img_url_entry)
-
-        open_image_icon = QIcon("icons/folder.png")
-        self.open_image_button = QPushButton(self)
-        self.open_image_button.clicked.connect(self.open_image)
-        self.open_image_button.setIcon(open_image_icon)
-        self.open_image_button.setIconSize(QSize(23, 23))
-        self.open_image_button.setFixedSize(28, 28)
-        button_layout.addWidget(self.open_image_button)
-
-        layout.addLayout(button_layout)  # Add the button layout to the main layout
-        layout.addWidget(self.file_path_label)
-
-        layout.addWidget(QLabel(""))
-
-        layout.addLayout(checkbox_layout)  # Add the checkbox layout to the main layout
-
-        self.checkbox_rbb = QCheckBox("Remove Black Borders")
-        checkbox_layout.addWidget(self.checkbox_rbb)
-
-        self.checkbox_iad = QCheckBox("Include All Details")
-        checkbox_layout.addWidget(self.checkbox_iad)
-
-        layout.addWidget(QLabel(""))
-
-        layout.addWidget(QLabel("Anilist Anime ID [OPTIONAL] [https://anilist.co/]"))
-
-        self.anilist_entry = QLineEdit(self)
-        self.anilist_entry.setPlaceholderText(
-            "Use this if you know what anime it is and you just need the scene details"
+    def showMessageBox(self):
+        w = MessageBox(
+            'ZenNotes 📝',
+            (
+                    "Version : 1.1"
+                    + "\n" + "\n" + "\n" + "💝  I hope you'll enjoy using ZenNotes as much as I did while coding it  💝" + "\n" + "\n" + "\n" +
+                    "Made with 💖 By Rohan Kishore"
+            ),
+            self
         )
-        layout.addWidget(self.anilist_entry)
+        w.yesButton.setText('GitHub')
+        w.cancelButton.setText('Return')
 
-        search_button = QPushButton("Search")
-        search_button.clicked.connect(self.onClickSearch)
-        layout.addWidget(search_button)
+        if w.exec():
+            QDesktopServices.openUrl(QUrl("https://github.com/rohankishore/"))
 
-    def open_image(self):
-        # options = QFileDialog.Options()
-        file_path, _ = QFileDialog.getOpenFileName(
-            self,
-            "Open Image to Search",
-            "",
-            "Image Files (*.jpg *.png *.bmp);;All Files (*)",
-        )
-
-        if file_path:
-            self.img_path = file_path
-            self.file_path_label.setText(file_path)
-
-    def returnToMenu(self):
-        self.stacked_widget.setCurrentWidget(self.main_menu_widget)
-        self.img_path = ""
-        self.file_path_label.setText("")  # Use self.file_path_label instead of self.main_menu_widget.file_path_label
-
-    def onClickThemeIcon(self):
-        if self.ctheme == "dark":
-            self.ctheme = "light"
-            qdarktheme.setup_theme("light")
-        else:
-            self.ctheme = "dark"
-            qdarktheme.setup_theme("dark")
-        self.onThemeIconVisibilityChanged()
-
-    def onThemeIconVisibilityChanged(self):
-        if self.ctheme == "dark":
-            self.themes_button.setIcon(QIcon("icons/dark.png"))
-        else:
-            self.themes_button.setIcon(QIcon("icons/light.png"))
-
-    def onClickSearch(self):
-        self.img_url = self.img_url_entry.text()
-        anilist_id = self.anilist_entry.text()
-        iad_status = self.checkbox_iad.isChecked()
-        rbb_status = self.checkbox_rbb.isChecked()
-        anilist_status = anilist_id if anilist_id else None
-
-        if self.img_url or self.img_path != "":
-            while self.layout().count():
-                item = self.layout().takeAt(0)
-                widget = item.widget()
-                if widget is not None:
-                    widget.deleteLater()
-
-            if self.checkbox_iad.isChecked():
-                iad_status = True
-            else:
-                iad_status = False
-
-            if self.checkbox_rbb.isChecked():
-                rbb_status = True
-            else:
-                rbb_status = False
-
-            if anilist_id == "":
-                anilist_status = None
-            else:
-                anilist_status = anilist_id
-
-            if self.img_url == "":
-                search.search_img(self, anilist_info=anilist_status, rbb=rbb_status)
-            else:
-                search.search_url(self)
-
-            if iad_status is True:
-                json_operations.json_to_tabular(self, include_all_details=True)
-            else:
-                json_operations.json_to_tabular(self, include_all_details=False)
-
-        else:
-            dlg = QMessageBox(self)
-            dlg.setWindowTitle("Error")
-            dlg.setText("Select any Image or Enter any URL to search")
-            dlg.setStandardButtons(QMessageBox.StandardButton.Ok)
-            button = dlg.exec()
-
-            if button == QMessageBox.StandardButton.Ok:
-                pass
-            else:
-                pass
 
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     qdarktheme.setup_theme("dark")
-    window = App()
+    window = Window()
     window.show()
     sys.exit(app.exec())
