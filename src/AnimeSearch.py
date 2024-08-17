@@ -57,10 +57,10 @@ class App(QWidget):
 
         layout.addWidget(QLabel(""))
 
-        self.img_url_entry = QLineEdit(self)
+        self.img_url_entry = LineEdit(self)
         self.img_url_entry.setPlaceholderText("Enter image URL or Upload an image")
 
-        self.file_path_label = QLabel("")
+        self.file_path_label = CaptionLabel()
 
         button_layout.addWidget(self.img_url_entry)
 
@@ -79,17 +79,19 @@ class App(QWidget):
 
         layout.addLayout(checkbox_layout)  # Add the checkbox layout to the main layout
 
-        self.checkbox_rbb = QCheckBox("Remove Black Borders")
+        self.checkbox_rbb = CheckBox()
+        self.checkbox_rbb.setText("Remove Black Borders")
         checkbox_layout.addWidget(self.checkbox_rbb)
 
-        self.checkbox_iad = QCheckBox("Include All Details")
+        self.checkbox_iad = CheckBox()
+        self.checkbox_iad.setText("Include All Details")
         checkbox_layout.addWidget(self.checkbox_iad)
 
         layout.addWidget(QLabel(""))
 
         layout.addWidget(QLabel("Anilist Anime ID [OPTIONAL] [https://anilist.co/]"))
 
-        self.anilist_entry = QLineEdit(self)
+        self.anilist_entry = LineEdit(self)
         self.anilist_entry.setPlaceholderText(
             "Use this if you know what anime it is and you just need the scene details"
         )

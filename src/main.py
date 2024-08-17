@@ -34,7 +34,7 @@ class Window(MSFluentWindow):
         self.initWindow()
 
     def initNavigation(self):
-        self.addSubInterface(self.homeInterface, FIF.EDIT, 'Write', FIF.EDIT, NavigationItemPosition.TOP)
+        self.addSubInterface(self.homeInterface, FIF.SEARCH, "Find Anime", FIF.SEARCH, NavigationItemPosition.TOP)
         # self.addSubInterface(self.settingInterface, FIF.SETTING, 'Settings', FIF.SETTING,  NavigationItemPosition.BOTTOM)
         self.navigationInterface.addItem(
             routeKey='Help',
@@ -48,7 +48,7 @@ class Window(MSFluentWindow):
             self.homeInterface.objectName())
 
     def initWindow(self):
-        self.resize(1100, 750)
+        self.resize(500, 160)
         self.setWindowIcon(QIcon('resource/icon.ico'))
         self.setWindowTitle('ZenNotes')
 
@@ -75,7 +75,7 @@ class Window(MSFluentWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    qdarktheme.setup_theme("dark")
+    #qdarktheme.setup_theme("dark")
     window = Window()
     window.show()
     sys.exit(app.exec())
