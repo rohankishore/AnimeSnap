@@ -32,7 +32,7 @@ And much more if you check `Include All Details`. It will also show multiple res
 
 #### Using the App
 
-![image](https://github.com/rohankishore/AnimeSnap/assets/109947257/17b36284-4231-4747-b047-185e892b9252)
+![image](https://github.com/user-attachments/assets/fc462b43-856f-410c-b998-f6841e2fd7df)
 
 You can either use an image link or upload an image from your PC. With v2.0, there are 2 new checkboxes. Removing black bars will help to increase the accuracy of the overall results if there are any black borders in your image, though the processing time may slightly increase. By checking `Include All Details`, you can get all the info that you get by uploading to JSON. 
 
@@ -40,12 +40,6 @@ Also, now you can filter results by using [Anilist](https://anilist.co/) ID. Thi
 
 <br>
 
-
-## 🌊 Demo
-
-![image](https://github.com/rohankishore/AnimeSnap/assets/109947257/016033db-b51e-4521-afef-5d878fdf8b16)
-
-<br>
 
 ## 💖 Credits
 
