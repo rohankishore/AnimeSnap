@@ -45,6 +45,11 @@ class App(QWidget):
 
         theme_icon = QIcon("icons/dark.png")
         self.themes_button = QPushButton(self)
+        self.themes_button.setStyleSheet("""
+        QPushButton {
+        border: none;
+        }
+        """)
         self.themes_button.setIconSize(QSize(23, 23))
         self.themes_button.clicked.connect(self.onClickThemeIcon)
         self.themes_button.setIcon(theme_icon)
@@ -65,7 +70,12 @@ class App(QWidget):
         button_layout.addWidget(self.img_url_entry)
 
         open_image_icon = QIcon("icons/folder.png")
-        self.open_image_button = PushButton(self)
+        self.open_image_button = QPushButton(self)
+        self.open_image_button.setStyleSheet("""
+        QPushButton {
+        border: none;
+        }
+        """)
         self.open_image_button.clicked.connect(self.open_image)
         self.open_image_button.setIcon(open_image_icon)
         self.open_image_button.setIconSize(QSize(23, 23))
