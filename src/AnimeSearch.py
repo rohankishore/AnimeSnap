@@ -64,7 +64,7 @@ class App(QWidget):
 
         button_layout.addWidget(self.img_url_entry)
 
-        open_image_icon = QIcon("icons/folder.png")
+        open_image_icon = FIF.FOLDER
         self.open_image_button = QPushButton(self)
         self.open_image_button.clicked.connect(self.open_image)
         self.open_image_button.setIcon(open_image_icon)
