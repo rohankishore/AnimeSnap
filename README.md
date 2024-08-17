@@ -1,3 +1,9 @@
+<div align="center">
+
+![icon](https://github.com/user-attachments/assets/e7244321-0452-4a9d-b24d-1b70eedb16e7)
+
+</div>
+
 <h1 align="center">⛩️ AnimeSnap 🍥</h1>
 
 <div align="center">
