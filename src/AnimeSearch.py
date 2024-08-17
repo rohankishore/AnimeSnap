@@ -86,7 +86,9 @@ class App(QWidget):
 
         layout.addWidget(QLabel(""))
 
-        layout.addWidget(QLabel("Anilist Anime ID [OPTIONAL] [https://anilist.co/]"))
+        anilist_label = CaptionLabel()
+        anilist_label.setText("Anilist Anime ID [OPTIONAL] [https://anilist.co/]")
+        layout.addWidget(anilist_label)
 
         self.anilist_entry = LineEdit(self)
         self.anilist_entry.setPlaceholderText(

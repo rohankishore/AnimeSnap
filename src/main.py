@@ -45,8 +45,8 @@ class Window(MSFluentWindow):
 
     def initWindow(self):
         self.resize(500, 160)
-        self.setWindowIcon(QIcon('resource/icon.ico'))
-        self.setWindowTitle('ZenNotes')
+        self.setWindowIcon(QIcon('icons/icon.png'))
+        self.setWindowTitle('AnimeSnap')
 
         w, h = 1200, 800
         self.move(w // 2 - self.width() // 2, h // 2 - self.height() // 2)
