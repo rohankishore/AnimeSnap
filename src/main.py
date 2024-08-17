@@ -2,6 +2,10 @@ import sys
 import os
 import json_operations
 import search
+from qfluentwidgets import *
+from qfluentwidgets import FluentIcon as FIF
+from qframelesswindow import *
+
 import qdarktheme
 from PyQt6.QtCore import *
 from PyQt6.QtGui import *
